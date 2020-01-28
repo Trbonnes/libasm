@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:44:56 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/12/27 13:56:12 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/28 12:50:22 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,22 @@ void	test_strdup(void)
 	printf("\nstrdup\n");
 	printf("-------------------MINE-------------------\n");
 	printf("%s \n", (dst = ft_strdup("Hello")));
+	printf("//freeing dst//\n");
 	free(dst);
+	printf("//dst freed//\n");
 	printf("%s \n", (dst = ft_strdup("Hello World !")));
+	printf("//freeing dst//\n");
 	free(dst);
+	printf("//dst freed//\n");
 	printf("-------------------TRUE-------------------\n");
 	printf("%s \n", (dst = strdup("Hello")));
+	printf("//freeing dst//\n");
 	free(dst);
+	printf("//dst freed//\n");
 	printf("%s \n", (dst = strdup("Hello World !")));
+	printf("//freeing dst//\n");
 	free(dst);
+	printf("//dst freed//\n");
 }
 
 int main(void)

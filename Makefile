@@ -1,26 +1,29 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+ASM= nasm
+ASMFLAGS= -f macho64 -g
+OBJECTS= src/ft_strlen.o src/ft_strcpy.o src/ft_strcmp.o src/ft_write.o src/ft_read.o src/ft_strdup.o
+NAME= libasm.a
+TEST_BINARY= test
+TEST_FILES= src/main.c
+TEST_CC= gcc
+TEST_CFLAGS= -Wall -Wextra -Werror
 
-NAME = libasm
+%.o: %.s
+	$(ASM) $(ASMFLAGS) -o $@ $<
 
-${NAME}:
-			nasm -f macho64 -g -o src/ft_strlen.o src/ft_strlen.s
-			nasm -f macho64 -g -o src/ft_strcpy.o src/ft_strcpy.s
-			nasm -f macho64 -g -o src/ft_strcmp.o src/ft_strcmp.s
-			nasm -f macho64 -g -o src/ft_write.o src/ft_write.s
-			nasm -f macho64 -g -o src/ft_read.o src/ft_read.s
-			nasm -f macho64 -g -o src/ft_strdup.o src/ft_strdup.s
-			${CC} ${CFLAGS} src/main.c src/ft_strlen.o src/ft_strcpy.o src/ft_strcmp.o src/ft_write.o src/ft_read.o src/ft_strdup.o
+$(NAME): $(OBJECTS)
+	ar rc $(NAME) $(OBJECTS)
 
-all:		${NAME}
+all: $(NAME)
 
-clean: 
-		cd src && rm -f *.o
+$(TEST_BINARY): $(TEST_FILES)
+	$(TEST_CC) $(TEST_CFLAGS) $(TEST_FILES) $(NAME) -o $(TEST_BINARY)
 
-fclean:	clean
-		rm -f ${NAME}
-		rm -f a.out
+clean:
+	rm -f $(OBJECTS)
 
-re:		fclean all
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
 
 .PHONY: all clean fclean re
