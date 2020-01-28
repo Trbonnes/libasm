@@ -15,8 +15,7 @@ ${NAME}:
 all:		${NAME}
 
 clean: 
-		cd src
-		rm -f *.o
+		cd src && rm -f *.o
 
 fclean:	clean
 		rm -f ${NAME}

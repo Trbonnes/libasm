@@ -11,25 +11,27 @@
 ; **************************************************************************** ;
 
 section .text
-	global _ft_strdup
-	extern _ft_strlen
-	extern _ft_strcpy
-	extern _malloc
+    global _ft_strdup
+    extern _malloc
+    extern _ft_strlen
+    extern _ft_strcpy
 
 _ft_strdup:
-	mov	rbx, rdi
-	call _ft_strlen
-	mov	rdi, rax
-	inc	rdi
-	
-	call _malloc
-	cmp rax, 0
-	je end
+    push rbx            ;liberer rbx
+    mov rbx, rdi        ;save arg
+    call _ft_strlen     ;len arg
+    mov rdi, rax        ;save len
+    inc rdi   			;increment len for ‘\0’
 
-	mov rdi, rax
-	mov rsi, rbx
+    call _malloc
+    cmp rax, 0
+    je end
 
-	call _ft_strcpy
+    mov rdi, rax        ;rdi devient dst
+    mov rsi, rbx        ;rsi devient src
+
+    call _ft_strcpy
 
 end:
-	ret
+    pop rbx
+    ret
