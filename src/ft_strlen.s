@@ -18,6 +18,8 @@ _ft_strlen:
 
 	cmp rdi, 0
 	je end
+	cmp [rdi], byte 0
+	je end
 
 inc_loop:
 	inc rax

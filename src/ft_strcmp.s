@@ -14,8 +14,8 @@ section .text
 	global _ft_strcmp
 
 _ft_strcmp:
-	mov rax, [rsi]
-	sub rax, [rdi]
+	mov rax, [rdi]
+	sub rax, [rsi]
 	cmp rax, 0
 	je cmp_zero
 

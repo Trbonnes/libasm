@@ -20,4 +20,9 @@ _ft_read:
 	;rax -> return value tjrs automatiquement mise par le syscall
 	mov rax, 0x2000003
 	syscall
+	jc error
+	ret
+
+error :
+	mov rax, -0x1
 	ret
